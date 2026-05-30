@@ -8,14 +8,20 @@ on:
   workflow_dispatch:
 
 jobs:
-    first_job:
+    build_job_1:
       runs-on: ubuntu-latest
       steps:
       - name: checkout Repo
         uses: actions/checkout@v6
-        
+
       - name: Welcome message
         run: echo "My first Github Actions job"
 
       - name: List files
         run: ls
+    test_job_1:
+      needs: build_job_1
+      runs-on: ubuntu-latest
+      steps:
+      - name: Sleep for 10 seconds
+        run: Sleep 10 sec
