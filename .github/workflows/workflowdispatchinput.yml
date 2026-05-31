@@ -1,0 +1,49 @@
+name: Manual Dispatch Pipeline
+
+on:
+  workflow_dispatch:
+    inputs:
+      log_level:
+        description: 'Log level severity'
+        required: true
+        default: 'info'
+        type: choice
+        options:
+          - info
+          - warning
+          - debug
+      
+      environment:
+        description: 'Target deployment environment'
+        required: true
+        type: environment
+
+      run_tests:
+        description: 'Toggle test execution'
+        required: false
+        default: true
+        type: boolean
+
+      release_version:
+        description: 'Version tag to apply (e.g., v1.0.0)'
+        required: false
+        type: string
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Print Setup Details
+        run: |
+          echo "Triggered by: ${{ github.actor }}"
+          echo "Log level set to: ${{ inputs.log_level }}"
+          echo "Target version: ${{ inputs.release_version }}"
+
+      - name: Conditional Test Step
+        if: ${{ inputs.run_tests == true }}
+        run: echo "Running test suites..."
