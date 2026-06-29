@@ -8,9 +8,6 @@ name: example-basic
 # uses: cypress-io/github-action@v7
 on:
   push:
-    branches:
-      - 'master'
-  pull_request:
   workflow_dispatch:
 permissions:
   contents: read
