@@ -20,5 +20,5 @@ jobs:
       needs: build_job_1
       runs-on: ubuntu-latest
       steps:
-      - name: Sleep for 2 seconds
-        run: Sleep 2 sec
+      - name: Sleep for 3 seconds
+        run: Sleep 3 sec
