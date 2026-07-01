@@ -29,3 +29,28 @@ jobs:
 
       - name: Print Redis Client Version
         run: redis-cli --version
+  setup-servers1:
+    needs: setup-servers
+    name: Install Redis on ${{ matrix.server }}
+    runs-on: ubuntu-24.04
+
+    strategy:
+
+      matrix:
+        server: [server-1, server-2]
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Show current server
+        run: echo "Running job for ${{ matrix.server }}"
+
+      - name: Update apt index
+        run: sudo apt-get update
+
+      - name: Install Redis Tools
+        run: sudo apt-get install -y redis-tools
+
+      - name: Print Redis Client Version
+        run: redis-cli --version
