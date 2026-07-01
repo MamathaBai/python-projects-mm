@@ -1,0 +1,25 @@
+name: Install Redis Client
+
+on: 
+    push:
+    workflow_dispatch:
+
+jobs:
+  setup-servers:
+    strategy:
+      matrix:
+        server: [server-1, server-2]
+    runs-on: ubuntu-24.04
+    
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Update apt index
+        run: sudo apt-get update
+
+      - name: Install Redis Tools
+        run: sudo apt-get install -y redis-tools
+
+      - name: Print Redis Client Version
+        run: redis-cli --version

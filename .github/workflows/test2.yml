@@ -1,0 +1,21 @@
+name: Check Docker Version
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  check-version:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository code
+        uses: actions/checkout@v4
+
+      - name: Display Docker Version
+        run: docker --version
+
+
+
+
+
