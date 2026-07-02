@@ -1,0 +1,43 @@
+name: Artifact Workflow Example
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  # Job 1: Generates and uploads the artifact
+  build-and-upload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository code
+        uses: actions/checkout@v4
+
+      - name: Create a sample file
+        run: |
+          mkdir -p output
+          echo "Hello from the build job!" > output/sample.txt
+
+      - name: Upload the artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifact
+          path: output/sample.txt
+          retention-days: 3
+
+  # Job 2: Downloads and processes the uploaded artifact
+  download-and-process:
+    runs-on: ubuntu-latest
+    needs: build-and-upload # Ensures this job runs only after the upload job succeeds
+    steps:
+      - name: Checkout repository code
+        uses: actions/checkout@v4
+
+      - name: Download the artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifact
+          path: downloaded-output
+
+      - name: Verify and use the downloaded file
+        run: |
+          cat downloaded-output/sample.txt
