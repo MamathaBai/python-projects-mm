@@ -9,5 +9,6 @@ pizzas = ['peparoni','cheese','vegetable']
 for pizza in pizzas:
     print(f'My favorite pizza is {pizza.title()}')
     print(f'I cannot wait to eat pizza {pizza.title()} \n')
-print(f"thank you for all pizzas") 
+print(f"thank you for all pizzas")
+print("changed to sandwich")
 print("I really love pizza")
