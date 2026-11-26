@@ -14,4 +14,8 @@ print("changed to sandwich")
 print("Loved sandwiches")
 print("I really love pizza")
 print("yummy pizza")
+<<<<<<< HEAD
 print("I like pizza")
+=======
+print("nice saqndwiches")
+>>>>>>> main
